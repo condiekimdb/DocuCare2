@@ -12,9 +12,9 @@ import '@mantine/core/styles.css';
 // import React from 'react';
 
 const PatientInfo = () => <div className="box">Patient Info</div>;
-const DoctorNotes = () => <div className="box">Doctor Notes</div>;
+const PatientSummary = () => <div className="box">Patient Summary</div>;
 const PatientChart = () => <div className="box">Patient Chart</div>;
-const PatientAnalysis = () => <div className="box">Patient Analysis</div>;
+const PatientAnalysis = () => <div className="box">Doctor Notes</div>;
 
 
 
@@ -38,7 +38,7 @@ function App() {
 
         <Grid>
           <Grid.Col span={6}><PatientInfo /></Grid.Col>
-          <Grid.Col span={6}><DoctorNotes /></Grid.Col>
+          <Grid.Col span={6}><PatientSummary /></Grid.Col>
           <Grid.Col span={6}><PatientChart /></Grid.Col>
           <Grid.Col span={6}><PatientAnalysis /></Grid.Col>
         </Grid>
