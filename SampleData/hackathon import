@@ -1,24 +1,4 @@
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=patients --type=csv --headerline --file=patients.csv
 
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=procedures --type=csv --headerline --file=procedures.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=observations --type=csv --headerline --file=observations.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=medications --type=csv --headerline --file=medications.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=immunizations --type=csv --headerline --file=immunizations.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=encounters --type=csv --headerline --file=encounters.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=conditions --type=csv --headerline --file=conditions.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=careplans --type=csv --headerline --file=careplans.csv
-
-mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password= --db=SampleData --collection=allergies --type=csv --headerline --file=allergies.csv
-
-mongosh "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/"  --username hackathon_user --password=
-
-mongodb+srv://hackathon_user:***@sa-acq-hackathon.23xdp.mongodb.net/
 
 db.patients.aggregate([
   {
