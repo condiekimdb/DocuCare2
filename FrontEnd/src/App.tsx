@@ -1,13 +1,13 @@
 import './App.css'
-import { Container, TextInput, Button, Title, Box, Space } from '@mantine/core';
+// import { Container, TextInput, Button, Title, Box, Space } from '@mantine/core';
 import { MantineProvider } from '@mantine/core';
 import TextInputExample from './TextInputExample';
 import TextAreaExample from './TextAreaExample';
-import React from 'react';
+// import React from 'react';
 
 function App() {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider>
       <div>
         <h1>sa hackathon</h1>
         <div style={{ padding: '20px' }}>

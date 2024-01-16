@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Textarea, Button, Box } from '@mantine/core';
 
 function TextAreaExample() {
   const [value, setValue] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     alert(`Textarea Value: ${value}`);
   };

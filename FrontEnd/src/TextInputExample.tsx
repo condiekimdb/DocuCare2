@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextInput, Button, Box } from '@mantine/core';
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
+// import { MantineProvider } from '@mantine/core';
 
 function TextInputExample() {
   const [value, setValue] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     alert(`Input Value: ${value}`);
   };
