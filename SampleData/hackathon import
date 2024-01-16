@@ -1,0 +1,95 @@
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=patients --type=csv --headerline --file=patients.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=procedures --type=csv --headerline --file=procedures.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=observations --type=csv --headerline --file=observations.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=medications --type=csv --headerline --file=medications.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=immunizations --type=csv --headerline --file=immunizations.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=encounters --type=csv --headerline --file=encounters.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=conditions --type=csv --headerline --file=conditions.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=careplans --type=csv --headerline --file=careplans.csv
+
+mongoimport "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/" --username=hackathon_user --password=hEcT4LtMXGejhrnw --db=SampleData --collection=allergies --type=csv --headerline --file=allergies.csv
+
+mongosh "mongodb+srv://sa-acq-hackathon.23xdp.mongodb.net/"  --username hackathon_user --password=hEcT4LtMXGejhrnw
+
+mongodb+srv://hackathon_user:hEcT4LtMXGejhrnw@sa-acq-hackathon.23xdp.mongodb.net/
+
+db.patients.aggregate([
+  {
+    $lookup: {
+      from: "allergies",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "allergies",
+    },
+  },
+  {
+    $lookup: {
+      from: "careplans",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "careplans",
+    },
+  },
+  {
+    $lookup: {
+      from: "conditions",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "conditions",
+    },
+  },
+  {
+    $lookup: {
+      from: "encounters",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "encounters",
+    },
+  },
+  {
+    $lookup: {
+      from: "immunizations",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "immunizations",
+    },
+  },
+  {
+    $lookup: {
+      from: "medications",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "medications",
+    },
+  },
+  {
+    $lookup: {
+      from: "observations",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "observations",
+    },
+  },
+  {
+    $lookup: {
+      from: "procedures",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "procedures",
+    },
+  },
+  {
+    $out:
+      /**
+       * Provide the name of the output collection.
+       */
+      "mergedPatientData",
+  },
+])
