@@ -4,7 +4,6 @@
 .DS_Store
 
 # Other common ignore patterns
-node_modules/
 *.log
 *.tmp
 *.temp
