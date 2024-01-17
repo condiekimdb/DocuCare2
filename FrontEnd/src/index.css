@@ -114,7 +114,7 @@ button:focus-visible {
   /* min-height:200px; */
 }
 
-#chart {
+.chart {
   height: 50px;
   min-height: 350px;
 }
