@@ -51,20 +51,10 @@ function App() {
             
           </div>
 
-          {/* <Grid>
-            <Grid.Col span={6}>
-              <Routes>
-                <Route path="/patient/:patientId" element={<PatientInfo />} />
-              </Routes>
-            </Grid.Col>
-            <Grid.Col span={6}><PatientSummary /></Grid.Col>
-            <Grid.Col span={6}><PatientChart /></Grid.Col>
-            <Grid.Col span={6}><PatientAnalysis /></Grid.Col>
-          </Grid> */}
-
           <Grid>
             <Grid.Col span={12}>
               <Routes>
+                <Route path="/" element={<PatientRouteWrapper />} />
                 <Route path="/patient/:patientId" element={<PatientRouteWrapper />} />
               </Routes>
             </Grid.Col>
