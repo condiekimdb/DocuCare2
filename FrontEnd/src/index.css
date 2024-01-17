@@ -44,7 +44,7 @@ h1.title {
   font-size: 3.2em;
   line-height: 1.1;
   color: #00ED64;
-  background-color: #001E2B;
+  /* background-color: #001E2B; */
 }
 
 .header {
