@@ -84,6 +84,31 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
     }
   };
 
+  const postDiagnosis = async () => {
+    const url =
+      "https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/vectordiagnosis";
+
+    setIsDiagnosing(true);
+    const symptoms_string = symptoms.map((item) => item.keyword);
+    const input = `Doctor Notes:\n${debounced}\n\nSymptoms:\n${symptoms_string.join(
+      "\n"
+    )}`;
+    console.log("Diagnosis Input", input);
+    try {
+      const response = await axios.post(url, {
+        text: input,
+      });
+      // setResponseData(response.data);
+      console.log("Diagnosis:", response.data);
+      setDiagnosis(response.data.message);
+    } catch (error) {
+      console.error("Error during POST request with axios:", error);
+    } finally {
+      setIsDiagnosing(false);
+      // setIsLoaded(true);
+    }
+  };
+
   useEffect(() => {
     if (debounced) {
       console.log("Debounced!", patientId);
@@ -103,17 +128,17 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced]);
 
-  useEffect(() => {
-    if (isDiagnosing) {
-      console.log("isDiagnosing");
-      setTimeout(() => {
-        setDiagnosis(
-          "Patient is likely experiencing seasonal Flu. Recommendation is over the counter flu medicine"
-        );
-        setIsDiagnosing(false);
-      }, 1000);
-    }
-  }, [isDiagnosing]);
+  // useEffect(() => {
+  //   if (isDiagnosing) {
+  //     console.log("isDiagnosing");
+  //     setTimeout(() => {
+  //       setDiagnosis(
+  //         "Patient is likely experiencing seasonal Flu. Recommendation is over the counter flu medicine"
+  //       );
+  //       setIsDiagnosing(false);
+  //     }, 1000);
+  //   }
+  // }, [isDiagnosing]);
 
   const chip_props = {
     color: "green",
@@ -203,7 +228,7 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
               <Text>{diagnosis}</Text>
             )}
             {diagnosis === "" && !isDiagnosing && (
-              <Button onClick={() => setIsDiagnosing(true)} color="green">
+              <Button onClick={() => postDiagnosis()} color="green">
                 <IconSparkles />
                 Diagnose
               </Button>
