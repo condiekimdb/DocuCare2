@@ -60,7 +60,7 @@ const PatientChart: React.FC<PatientChartProps> = ({
   }, [patientId, selectedDescription]); // Re-run the effect if patientId or selectedDescription changes
 
   return (
-    <Paper withBorder p={20} mt={20} style={{ border: "1px solid #ccc" }}>
+    <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
       <Select
         label="Select Observation to Chart"
         placeholder="Choose..."

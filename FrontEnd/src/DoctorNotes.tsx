@@ -147,7 +147,7 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
   };
 
   return (
-    <Paper withBorder p={20} mt={20} style={{ border: "1px solid #ccc" }}>
+    <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
       <Group w={600}>
         <Flex
           gap="xxs"

@@ -53,17 +53,18 @@ function PatientRouteWrapper() {
   return (
     <>
       <Grid>
-        <Grid.Col span={6}>
+        <Grid.Col span={12}>
           <PatientInfo patientId={patientId} patientData={patientData} />
         </Grid.Col>
         <Grid.Col span={6}>
           <PatientSummary patientId={patientId} patientData={patientData} />
         </Grid.Col>
-        <Grid.Col span={6}>
-          <PatientChart patientId={patientId} patientData={patientData} />
-        </Grid.Col>
+
         <Grid.Col span={6}>
           <DoctorNotes patientId={patientId} />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <PatientChart patientId={patientId} patientData={patientData} />
         </Grid.Col>
       </Grid>
     </>

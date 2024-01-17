@@ -13,7 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   /* Ensure full height */
@@ -43,12 +44,12 @@ body {
 h1.title {
   font-size: 3.2em;
   line-height: 1.1;
-  color: #00ED64;
+  color: #00ed64;
   /* background-color: #001E2B; */
 }
 
 .header {
-  background-color: #001E2B;
+  background-color: #001e2b;
   padding: 1em;
 }
 
@@ -56,7 +57,7 @@ h1.title {
 }
 
 .header img {
-  max-width:125px;
+  max-width: 125px;
 }
 
 .header h2 {
@@ -108,12 +109,12 @@ button:focus-visible {
 .box {
   padding: 20px;
   border: 1px solid #ccc;
-  margin-top:20px;
+  margin-top: 20px;
   text-align: center;
-  min-height:200px;
+  /* min-height:200px; */
 }
 
-#chart{
-  height:50px;
-  min-height:350px;
+#chart {
+  height: 50px;
+  min-height: 350px;
 }

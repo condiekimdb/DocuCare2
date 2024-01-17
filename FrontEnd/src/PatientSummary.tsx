@@ -35,7 +35,7 @@ const PatientSummary: React.FC<PatientSummaryProps> = ({ patientId }) => {
   };
 
   return (
-    <Paper withBorder p={20} mt={20} style={{ border: "1px solid #ccc" }}>
+    <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
       <Text fw={700}>Patient Summary</Text>
       <Text>{summary}</Text>
     </Paper>
