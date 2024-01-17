@@ -80,15 +80,10 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
           { keyword: "Nausea" },
           { keyword: "Night Sweats" },
         ]);
-        // setSymptoms([
-        //   { keyword: "Short Breath" },
-        //   { keyword: "Itchy Throat" },
-        //   { keyword: "Fever" },
-        //   { keyword: "Insomnia" },
-        // ]);
         setIsLoading(false);
       }, 1000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced]);
 
   useEffect(() => {
