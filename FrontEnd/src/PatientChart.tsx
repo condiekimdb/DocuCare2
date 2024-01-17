@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Select, Tabs } from '@mantine/core';
+import { Paper, Select, Tabs } from "@mantine/core";
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 import "./App.css";
 
@@ -12,9 +12,11 @@ const PatientChart: React.FC<PatientChartProps> = ({
   patientId,
   patientData,
 }) => {
-  const [selectedDescription, setSelectedDescription] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<string>('historical'); // State to track the active tab
-  
+  const [selectedDescription, setSelectedDescription] = useState<string | null>(
+    null
+  );
+  const [activeTab, setActiveTab] = useState<string>("historical"); // State to track the active tab
+
   // Wrapper function for setActiveTab to handle potential null values
   const handleTabChange = (value: string | null) => {
     if (value !== null) {
@@ -42,15 +44,17 @@ const PatientChart: React.FC<PatientChartProps> = ({
     label: description,
   }));
 
+  /* Set default selectedDescription */
+  useEffect(() => {
+    if (
+      !selectedDescription &&
+      observations.includes("Systolic Blood Pressure")
+    ) {
+      setSelectedDescription("Systolic Blood Pressure");
+    }
+  }, [observations]);
 
-    /* Set default selectedDescription */
-useEffect(() => {
-if (!selectedDescription && observations.includes("Systolic Blood Pressure")) {
-    setSelectedDescription("Systolic Blood Pressure");
-}
-}, [observations]);
-
- /* Historical Chart */
+  /* Historical Chart */
   useEffect(() => {
     const sdk = new ChartsEmbedSDK({
       baseUrl: "https://charts.mongodb.com/charts-clarence_training-nwffr",
@@ -74,21 +78,20 @@ if (!selectedDescription && observations.includes("Systolic Blood Pressure")) {
     }
   }, [patientId, selectedDescription]); // Re-run the effect if patientId or selectedDescription changes
 
-
-/* Live Chart */
+  /* Live Chart */
   useEffect(() => {
-
     const sdk = new ChartsEmbedSDK({
       baseUrl: "https://charts.mongodb.com/charts-clarence_training-nwffr",
     });
-
 
     console.log(patientId);
     const chart = sdk.createChart({
       chartId: "65a7ea2a-1d1f-436b-8cf2-c8b862cea49f",
       filter: {
-        'metadata.sensorId': patientId
+        "metadata.sensorId": patientId,
       },
+      maxDataAge: 5,
+      autoRefresh: true,
     });
 
     const chartContainer = document.getElementById("live-chart");
@@ -101,9 +104,8 @@ if (!selectedDescription && observations.includes("Systolic Blood Pressure")) {
     }
   }, []);
 
-
   return (
-    <Paper withBorder p={20} style={{ border: '1px solid #ccc' }}>
+    <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
       <Tabs value={activeTab} onChange={handleTabChange}>
         <Tabs.List>
           <Tabs.Tab value="historical">Historical Data</Tabs.Tab>
@@ -111,13 +113,13 @@ if (!selectedDescription && observations.includes("Systolic Blood Pressure")) {
         </Tabs.List>
 
         <Tabs.Panel value="historical">
-        <Select
+          <Select
             label="Select Observation to Chart"
             placeholder="Choose..."
             data={dropdownOptions}
             value={selectedDescription}
             onChange={setSelectedDescription}
-        />
+          />
           <div className="chart" id="historical-chart"></div>
         </Tabs.Panel>
 
