@@ -13,6 +13,7 @@ import {
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { IconSparkles } from "@tabler/icons-react";
+import axios from "axios";
 
 type chip_keyword = {
   keyword: string;
@@ -23,8 +24,8 @@ interface DoctorNotesProps {
 }
 
 const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
-  const [value, setValue] = useState("");
-  const [debounced] = useDebouncedValue(value, 1000);
+  const [doctorNotes, setDoctorNotes] = useState("");
+  const [debounced] = useDebouncedValue(doctorNotes, 1000);
   const [isLoading, setIsLoading] = useState(false);
 
   const [keywords, setKeywords] = useState<chip_keyword[]>([]);
@@ -33,22 +34,58 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
   const [isDiagnosing, setIsDiagnosing] = useState(false);
   const [diagnosis, setDiagnosis] = useState("");
 
+  function processString(inputString: string) {
+    // Remove trailing period
+    const stringWithoutPeriod = inputString.replace(/\.$/, "");
+
+    // Convert comma-separated values into an array
+    const resultArray = stringWithoutPeriod.split(", ");
+
+    return resultArray;
+  }
+
+  const postPatientData = async () => {
+    const url =
+      "https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/generatesymptoms";
+
+    try {
+      const response = await axios.post(url, {
+        message: debounced,
+      });
+      // setResponseData(response.data);
+      console.log(response.data);
+      const ai_symptoms = processString(response.data.message);
+      const ai_symptoms_map = ai_symptoms.map((i) => {
+        return { keyword: i };
+      });
+      setSymptoms(ai_symptoms_map);
+    } catch (error) {
+      console.error("Error during POST request with axios:", error);
+    } finally {
+      // setIsLoaded(true);
+    }
+  };
+
   useEffect(() => {
     if (debounced) {
       console.log("Debounced!");
       setIsLoading(true);
+      // Get updated symptoms here
+
+      postPatientData();
+
       setTimeout(() => {
         setKeywords([
           { keyword: "Dizzyness" },
           { keyword: "Nausea" },
           { keyword: "Night Sweats" },
         ]);
-        setSymptoms([
-          { keyword: "Short Breath" },
-          { keyword: "Itchy Throat" },
-          { keyword: "Fever" },
-          { keyword: "Insomnia" },
-        ]);
+        // setSymptoms([
+        //   { keyword: "Short Breath" },
+        //   { keyword: "Itchy Throat" },
+        //   { keyword: "Fever" },
+        //   { keyword: "Insomnia" },
+        // ]);
         setIsLoading(false);
       }, 1000);
     }
@@ -86,8 +123,8 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
           <Text>Patient Notes: {patientId}</Text>
           <Textarea
             placeholder="Enter notes here..."
-            value={value}
-            onChange={(event) => setValue(event.currentTarget.value)}
+            value={doctorNotes}
+            onChange={(event) => setDoctorNotes(event.currentTarget.value)}
             autosize
             minRows={10}
             mb={10}
