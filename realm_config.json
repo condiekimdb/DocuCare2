@@ -1,0 +1,7 @@
+{
+    "app_id": "test-xgqfe",
+    "config_version": 20210101,
+    "name": "Test",
+    "provider_region": "aws-us-east-1",
+    "deployment_model": "LOCAL"
+}
