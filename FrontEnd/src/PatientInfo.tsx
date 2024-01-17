@@ -16,7 +16,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
   return (
     <Paper withBorder p={20} mt={20} style={{ border: "1px solid #ccc" }}>
       {patientData && (
-        <Group>
+        <Group justify="center">
           <Avatar color="cyan" radius="xl" size="xl">{`${
             String(patientData[0].first)[0]
           }${String(patientData[0].last)[0]}`}</Avatar>
@@ -26,6 +26,14 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
             ${patientData[0].first} ${patientData[0].last}`}
             </Text>
             <Text>DOB: {patientData[0].birthdate}</Text>
+          </Flex>
+          <Flex direction="column" align="flex-start">
+            <Text>{`Allergies: ${patientData[0].allergies.length}`}</Text>
+            <Text>{`Medications: ${patientData[0].medications.length}`}</Text>
+          </Flex>
+          <Flex direction="column" align="flex-start">
+            <Text>{`Pre-existing Conditions: ${patientData[0].conditions.length}`}</Text>
+            <Text>{`Past Procedures: ${patientData[0].procedures.length}`}</Text>
           </Flex>
         </Group>
       )}

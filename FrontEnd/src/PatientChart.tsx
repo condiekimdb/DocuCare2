@@ -90,7 +90,7 @@ const PatientChart: React.FC<PatientChartProps> = ({
       filter: {
         "metadata.sensorId": patientId,
       },
-      maxDataAge: 5,
+      maxDataAge: 10,
       autoRefresh: true,
     });
 
