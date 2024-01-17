@@ -1,9 +1,14 @@
-import './App.css'
-import { MantineProvider, Grid} from '@mantine/core';
-import DocucareLogo from './assets/docucare.png';
+import "./App.css";
+import { MantineProvider, Grid } from "@mantine/core";
+import DocucareLogo from "./assets/docucare.png";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 // import { Container, TextInput, Button, Title, Box, Space } from '@mantine/core';
 // import { MantineProvider, Container, Group, Text, Grid} from '@mantine/core';
 import '@mantine/core/styles.css';
@@ -60,24 +65,28 @@ function PatientRouteWrapper() {
 function App() {
   return (
     <Router>
-      
       <MantineProvider>
         <div>
-          <div className='header'>
+          <div className="header">
             <Grid>
-              <Grid.Col span={2}><img src={DocucareLogo} alt='DocuCare Logo' /></Grid.Col>
+              <Grid.Col span={2}>
+                <img src={DocucareLogo} alt="DocuCare Logo" />
+              </Grid.Col>
               <Grid.Col span={8}>
-                <h1 className='title'>DocuCare</h1>
-                <h2>Enhancing Doctor-Patient Relationships</h2></Grid.Col>
+                <h1 className="title">DocuCare</h1>
+                <h2>Enhancing Doctor-Patient Relationships</h2>
+              </Grid.Col>
             </Grid>
-            
           </div>
 
           <Grid>
             <Grid.Col span={12}>
               <Routes>
                 <Route path="/" element={<PatientRouteWrapper />} />
-                <Route path="/patient/:patientId" element={<PatientRouteWrapper />} />
+                <Route
+                  path="/patient/:patientId"
+                  element={<PatientRouteWrapper />}
+                />
               </Routes>
             </Grid.Col>
           </Grid>
@@ -86,7 +95,6 @@ function App() {
             Built on MongoDB by the NA Acq SA team
           </footer>
         </div>
-        
       </MantineProvider>
     </Router>
   );
