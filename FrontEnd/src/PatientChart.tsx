@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Select } from "@mantine/core";
+import { Paper, Select, Tabs } from '@mantine/core';
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 import "./App.css";
 
@@ -12,9 +12,15 @@ const PatientChart: React.FC<PatientChartProps> = ({
   patientId,
   patientData,
 }) => {
-  const [selectedDescription, setSelectedDescription] = useState<string | null>(
-    null
-  );
+  const [selectedDescription, setSelectedDescription] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('historical'); // State to track the active tab
+  
+  // Wrapper function for setActiveTab to handle potential null values
+  const handleTabChange = (value: string | null) => {
+    if (value !== null) {
+      setActiveTab(value);
+    }
+  };
 
   function extractUniqueDescriptions(data: any[]) {
     const uniqueDescriptions = new Set<string>();
@@ -36,7 +42,13 @@ const PatientChart: React.FC<PatientChartProps> = ({
     label: description,
   }));
 
+ /* Historical Chart */
   useEffect(() => {
+    const defaultDescription = observations.includes("Systolic Blood Pressure") 
+                               ? "Systolic Blood Pressure" 
+                               : null;
+    setSelectedDescription(defaultDescription);
+
     const sdk = new ChartsEmbedSDK({
       baseUrl: "https://charts.mongodb.com/charts-clarence_training-nwffr",
     });
@@ -49,7 +61,7 @@ const PatientChart: React.FC<PatientChartProps> = ({
       },
     });
 
-    const chartContainer = document.getElementById("chart");
+    const chartContainer = document.getElementById("historical-chart");
     try {
       if (chartContainer) {
         chart.render(chartContainer);
@@ -59,16 +71,57 @@ const PatientChart: React.FC<PatientChartProps> = ({
     }
   }, [patientId, selectedDescription]); // Re-run the effect if patientId or selectedDescription changes
 
+
+/* Live Chart */
+  useEffect(() => {
+
+    const sdk = new ChartsEmbedSDK({
+      baseUrl: "https://charts.mongodb.com/charts-clarence_training-nwffr",
+    });
+
+
+    console.log(patientId);
+    const chart = sdk.createChart({
+      chartId: "65a7ea2a-1d1f-436b-8cf2-c8b862cea49f",
+      filter: {
+        'metadata.sensorId': patientId
+      },
+    });
+
+    const chartContainer = document.getElementById("live-chart");
+    try {
+      if (chartContainer) {
+        chart.render(chartContainer);
+      }
+    } catch (error) {
+      window.alert("Chart failed to initialise");
+    }
+  }, []);
+
+
   return (
-    <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
-      <Select
-        label="Select Observation to Chart"
-        placeholder="Choose..."
-        data={dropdownOptions}
-        value={selectedDescription}
-        onChange={setSelectedDescription}
-      />
-      <div id="chart"></div>
+    <Paper withBorder p={20} style={{ border: '1px solid #ccc' }}>
+      <Tabs value={activeTab} onChange={handleTabChange}>
+        <Tabs.List>
+          <Tabs.Tab value="historical">Historical Data</Tabs.Tab>
+          <Tabs.Tab value="live">Live Data</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="historical">
+        <Select
+            label="Select Observation to Chart"
+            placeholder="Choose..."
+            data={dropdownOptions}
+            value={selectedDescription}
+            onChange={setSelectedDescription}
+        />
+          <div className="chart" id="historical-chart"></div>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="live">
+          <div className="chart" id="live-chart"></div>
+        </Tabs.Panel>
+      </Tabs>
     </Paper>
   );
 };
