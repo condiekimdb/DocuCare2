@@ -3,14 +3,23 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* Ensure full height */
+  min-height: 100vh;
+  /* Ensure full width */
+  width: 100%;
 }
 
 a {
@@ -25,14 +34,33 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: start;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
+h1.title {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #00ED64;
+  /* background-color: #001E2B; */
+}
+
+.header {
+  background-color: #001E2B;
+  padding: 1em;
+}
+
+.header h1 {
+}
+
+.header img {
+  max-width:125px;
+}
+
+.header h2 {
+  color: #fff;
 }
 
 button {
@@ -65,4 +93,27 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  font-size: 0.9em;
+  color: #fff; /* or any color you prefer */
+  background-color: #333; /* or any color you prefer */
+  border-top: 1px solid #444; /* optional */
+}
+
+.box {
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top:20px;
+  text-align: center;
+  min-height:200px;
+}
+
+#chart{
+  height:50px;
+  min-height:350px;
 }

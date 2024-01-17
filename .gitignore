@@ -1,0 +1,12 @@
+# Example .gitignore file
+
+# macOS system files
+.DS_Store
+
+# Other common ignore patterns
+*.log
+*.tmp
+*.temp
+build/
+dist/
+.env

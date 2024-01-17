@@ -1,0 +1,75 @@
+
+
+db.patients.aggregate([
+  {
+    $lookup: {
+      from: "allergies",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "allergies",
+    },
+  },
+  {
+    $lookup: {
+      from: "careplans",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "careplans",
+    },
+  },
+  {
+    $lookup: {
+      from: "conditions",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "conditions",
+    },
+  },
+  {
+    $lookup: {
+      from: "encounters",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "encounters",
+    },
+  },
+  {
+    $lookup: {
+      from: "immunizations",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "immunizations",
+    },
+  },
+  {
+    $lookup: {
+      from: "medications",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "medications",
+    },
+  },
+  {
+    $lookup: {
+      from: "observations",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "observations",
+    },
+  },
+  {
+    $lookup: {
+      from: "procedures",
+      localField: "patient",
+      foreignField: "PATIENT",
+      as: "procedures",
+    },
+  },
+  {
+    $out:
+      /**
+       * Provide the name of the output collection.
+       */
+      "mergedPatientData",
+  },
+])

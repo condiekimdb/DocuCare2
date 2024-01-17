@@ -18,10 +18,14 @@
     "@mantine/modals": "^7.4.1",
     "@mantine/nprogress": "^7.4.1",
     "@mantine/spotlight": "^7.4.1",
+    "@mongodb-js/charts-embed-dom": "^3.2.1",
+    "@tabler/icons-react": "^2.46.0",
+    "axios": "^1.6.5",
     "dayjs": "^1.11.10",
     "embla-carousel-react": "^7.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -39,19 +43,19 @@
     "vite": "^5.0.8"
   },
   "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "parserOptions": {
-            "parser": "babel-eslint"
-        },
-        "rules": {
-            "no-unused-vars": "off" 
-        }
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-unused-vars": "off"
     }
+  }
 }
