@@ -42,13 +42,16 @@ const PatientChart: React.FC<PatientChartProps> = ({
     label: description,
   }));
 
+
+    /* Set default selectedDescription */
+useEffect(() => {
+if (!selectedDescription && observations.includes("Systolic Blood Pressure")) {
+    setSelectedDescription("Systolic Blood Pressure");
+}
+}, [observations]);
+
  /* Historical Chart */
   useEffect(() => {
-    const defaultDescription = observations.includes("Systolic Blood Pressure") 
-                               ? "Systolic Blood Pressure" 
-                               : null;
-    setSelectedDescription(defaultDescription);
-
     const sdk = new ChartsEmbedSDK({
       baseUrl: "https://charts.mongodb.com/charts-clarence_training-nwffr",
     });
