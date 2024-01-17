@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css'
 import '@mantine/core/styles.css';
-import axios from 'axios';
 import { Grid} from '@mantine/core';
 
 /* Sample PatientID : aaa4c718-2f48-4c13-9ad0-d287cf280824 */

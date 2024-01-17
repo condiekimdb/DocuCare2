@@ -15,7 +15,7 @@ import '@mantine/core/styles.css';
 import PatientInfo from './PatientInfo';
 import PatientChart from './PatientChart';
 import PatientSummary from './PatientSummary';
-import DoctorNotes from './DoctorNotes';
+import DoctorNotes from './doctor-notes';
 
 function PatientRouteWrapper() {
   const { patientId } = useParams();
@@ -52,15 +52,13 @@ function PatientRouteWrapper() {
     <>
       <Grid>
       <Grid.Col span={6}><PatientInfo patientId={patientId} patientData={patientData} /></Grid.Col>
-      <Grid.Col span={6}><PatientSummary patientData={patientData} /></Grid.Col>
+      <Grid.Col span={6}><PatientSummary patientId={patientId} patientData={patientData} /></Grid.Col>
       <Grid.Col span={6}><PatientChart patientId={patientId} patientData={patientData} /></Grid.Col>
       <Grid.Col span={6}><DoctorNotes patientId={patientId} /></Grid.Col>
     </Grid> 
     </>
   );
 }
-
-
 
 function App() {
   return (

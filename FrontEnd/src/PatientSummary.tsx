@@ -1,4 +1,5 @@
 interface PatientSummaryProps {
+    patientId: string | undefined;
     patientData: any;
 }
 
