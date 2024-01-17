@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "@mantine/core/styles.css";
-import { Avatar, Grid, Paper, Text } from "@mantine/core";
+import { Avatar, Flex, Group, Paper, Text } from "@mantine/core";
 
 /* Sample PatientID : aaa4c718-2f48-4c13-9ad0-d287cf280824 */
 
@@ -11,9 +11,25 @@ interface PatientInfoProps {
 }
 
 const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
+  //   const patient = patientData[0];
+
   return (
     <Paper withBorder p={20} mt={20} style={{ border: "1px solid #ccc" }}>
       {patientData && (
+        <Group>
+          <Avatar color="cyan" radius="xl" size="xl">{`${
+            String(patientData[0].first)[0]
+          }${String(patientData[0].last)[0]}`}</Avatar>
+          <Flex direction="column">
+            <Text fw={700}>
+              {`${patientData[0].prefix}
+            ${patientData[0].first} ${patientData[0].last}`}
+            </Text>
+            <Text>DOB: {patientData[0].birthdate}</Text>
+          </Flex>
+        </Group>
+      )}
+      {/* {patientData && (
         <div>
           {patientData.map(
             (
@@ -118,7 +134,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
             )
           )}
         </div>
-      )}
+      )} */}
     </Paper>
   );
 };
