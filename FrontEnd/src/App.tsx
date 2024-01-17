@@ -7,16 +7,16 @@ import { BrowserRouter as Router, Route, Routes, useParams} from 'react-router-d
 import '@mantine/core/styles.css';
 import PatientInfo from './PatientInfo';
 import PatientChart from './PatientChart';
-// import DoctorNotes from './DoctorNotes';
+import PatientSummary from './PatientSummary';
+import DoctorNotes from './DoctorNotes';
 
 // import TextInputExample from './TextInputExample';
 // import TextAreaExample from './TextAreaExample';
 
 // import React from 'react';
 
-const PatientSummary = () => <div className="box">Patient Summary</div>;
+// const PatientSummary = () => <div className="box">Patient Summary</div>;
 // const PatientChart = () => <div className="box">Patient Chart</div>;
-const PatientAnalysis = () => <div className="box">Doctor Notes</div>;
 
 function PatientRouteWrapper() {
   const { patientId } = useParams();
@@ -25,11 +25,9 @@ function PatientRouteWrapper() {
     <>
       <Grid>
       <Grid.Col span={6}><PatientInfo patientId={patientId} /></Grid.Col>
-      <Grid.Col span={6}><PatientSummary/></Grid.Col>
-      {/* <Grid.Col span={6}><PatientSummary patientId={patientId} /></Grid.Col> */}
+      <Grid.Col span={6}><PatientSummary patientId={patientId} /></Grid.Col>
       <Grid.Col span={6}><PatientChart patientId={patientId} /></Grid.Col>
-      <Grid.Col span={6}><PatientAnalysis/></Grid.Col>
-      {/* <Grid.Col span={6}><PatientAnalysis patientId={patientId} /></Grid.Col> */}
+      <Grid.Col span={6}><DoctorNotes patientId={patientId} /></Grid.Col>
     </Grid> 
     </>
   );
