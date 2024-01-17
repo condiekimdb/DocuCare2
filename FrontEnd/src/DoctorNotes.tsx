@@ -35,16 +35,12 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
   const [diagnosis, setDiagnosis] = useState("");
 
   function processString(inputString: string) {
-    // Remove trailing period
     const stringWithoutPeriod = inputString.replace(/\.$/, "");
-
-    // Convert comma-separated values into an array
     const resultArray = stringWithoutPeriod.split(", ");
-
     return resultArray;
   }
 
-  const postPatientData = async () => {
+  const postSymptoms = async () => {
     const url =
       "https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/generatesymptoms";
 
@@ -66,22 +62,43 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
     }
   };
 
+  const postKeywords = async () => {
+    const url =
+      "https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/keywords";
+
+    try {
+      const response = await axios.post(url, {
+        text: debounced,
+      });
+      // setResponseData(response.data);
+      console.log(response.data);
+      const ai_keywords = processString(response.data.message);
+      const ai_keywords_map = ai_keywords.map((i) => {
+        return { keyword: i };
+      });
+      setKeywords(ai_keywords_map);
+    } catch (error) {
+      console.error("Error during POST request with axios:", error);
+    } finally {
+      // setIsLoaded(true);
+    }
+  };
+
   useEffect(() => {
     if (debounced) {
-      console.log("Debounced!");
+      console.log("Debounced!", patientId);
       setIsLoading(true);
       // Get updated symptoms here
 
-      postPatientData();
+      Promise.all([postSymptoms(), postKeywords()]).then(() =>
+        setIsLoading(false)
+      );
+      // postSymptoms();
+      // postKeywords();
 
-      setTimeout(() => {
-        setKeywords([
-          { keyword: "Dizzyness" },
-          { keyword: "Nausea" },
-          { keyword: "Night Sweats" },
-        ]);
-        setIsLoading(false);
-      }, 1000);
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced]);

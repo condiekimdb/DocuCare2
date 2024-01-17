@@ -9,12 +9,13 @@ interface PatientSummaryProps {
 
 const PatientSummary: React.FC<PatientSummaryProps> = ({ patientId }) => {
   const [summary, setSummary] = useState(
-    "Angelo is an 81-year-old black male patient who has a history of various acute and viral conditions such as sinusitis, acute bronchitis, and acute viral pharyngitis. He also has osteoarthritis of the hip and prediabetes, and has experienced a stroke in the past. Angelo is currently being medicated for his hip osteoarthritis, bronchitis, and multiple instances of stroke. The reason for his most recent visit is not noted."
+    // "Angelo is an 81-year-old black male patient who has a history of various acute and viral conditions such as sinusitis, acute bronchitis, and acute viral pharyngitis. He also has osteoarthritis of the hip and prediabetes, and has experienced a stroke in the past. Angelo is currently being medicated for his hip osteoarthritis, bronchitis, and multiple instances of stroke. The reason for his most recent visit is not noted."
+    ""
   );
 
-  //   useEffect(() => {
-  //     postPatientSummary(patientId);
-  //   }, []);
+  useEffect(() => {
+    postPatientSummary(String(patientId));
+  }, []);
 
   const postPatientSummary = async (patientId: string) => {
     const url =
