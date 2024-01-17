@@ -16,6 +16,7 @@ import PatientInfo from './PatientInfo';
 import PatientChart from './PatientChart';
 import PatientSummary from './PatientSummary';
 import DoctorNotes from './doctor-notes';
+import SearchModal from "./SearchModal";
 
 function PatientRouteWrapper() {
   const { patientId } = useParams();
@@ -61,9 +62,21 @@ function PatientRouteWrapper() {
 }
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  useEffect(() => {
+    setIsModalOpen(false); // Automatically open the modal when the app starts
+  }, []);
+
   return (
     <Router>
       <MantineProvider>
+      <SearchModal 
+          modalOpened={isModalOpen} 
+          setModalOpened={setIsModalOpen} 
+          searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery}
+        />
         <div>
           <div className="header">
             <Grid>
