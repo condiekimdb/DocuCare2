@@ -1,0 +1,7 @@
+{
+    "app_id": "testapp-nlfpz",
+    "config_version": 20210101,
+    "name": "testapp",
+    "provider_region": "aws-us-east-1",
+    "deployment_model": "LOCAL"
+}
