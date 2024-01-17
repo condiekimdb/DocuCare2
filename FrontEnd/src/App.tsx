@@ -1,5 +1,5 @@
 import "./App.css";
-import { MantineProvider, Grid } from "@mantine/core";
+import { MantineProvider, Grid, Button } from "@mantine/core";
 import DocucareLogo from "./assets/docucare.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,7 +16,11 @@ import PatientSummary from "./PatientSummary";
 import DoctorNotes from "./DoctorNotes";
 import SearchModal from "./SearchModal";
 
-function PatientRouteWrapper() {
+interface PatientRouteWrapperProps {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function PatientRouteWrapper({ setIsModalOpen }: PatientRouteWrapperProps) {
   const { patientId } = useParams();
   const [patientData, setPatientData] = useState(null); // State to hold patient data
   const [isLoaded, setIsLoaded] = useState(false); // state to track data loading
@@ -53,10 +57,15 @@ function PatientRouteWrapper() {
   return (
     <>
       <Grid>
-        <Grid.Col span={12}>
+        <Grid.Col span={8}>
           <PatientInfo patientId={patientId} patientData={patientData} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Button variant="filled" onClick={() => setIsModalOpen(true)}>
+            Patient Search
+          </Button>
+        </Grid.Col>
+        <Grid.Col span={6}>
           <PatientSummary patientId={patientId} patientData={patientData} />
         </Grid.Col>
 
@@ -103,10 +112,10 @@ function App() {
           <Grid>
             <Grid.Col span={12}>
               <Routes>
-                <Route path="/" element={<PatientRouteWrapper />} />
+                <Route path="/" element={<PatientRouteWrapper  setIsModalOpen={setIsModalOpen}/>} />
                 <Route
                   path="/patient/:patientId"
-                  element={<PatientRouteWrapper />}
+                  element={<PatientRouteWrapper setIsModalOpen={setIsModalOpen}/>}
                 />
               </Routes>
             </Grid.Col>

@@ -118,3 +118,12 @@ button:focus-visible {
   height: 50px;
   min-height: 350px;
 }
+
+#result {
+  padding:5;
+}
+
+#result:hover {
+  color: #fff;
+  background-color:#00684A
+}
