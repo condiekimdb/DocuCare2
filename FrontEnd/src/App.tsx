@@ -1,21 +1,19 @@
 import "./App.css";
 import { MantineProvider, Grid } from "@mantine/core";
 import DocucareLogo from "./assets/docucare.png";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   useParams,
 } from "react-router-dom";
-// import { Container, TextInput, Button, Title, Box, Space } from '@mantine/core';
-// import { MantineProvider, Container, Group, Text, Grid} from '@mantine/core';
-import '@mantine/core/styles.css';
-import PatientInfo from './PatientInfo';
-import PatientChart from './PatientChart';
-import PatientSummary from './PatientSummary';
-import DoctorNotes from './doctor-notes';
+import "@mantine/core/styles.css";
+import PatientInfo from "./PatientInfo";
+import PatientChart from "./PatientChart";
+import PatientSummary from "./PatientSummary";
+import DoctorNotes from "./DoctorNotes";
 import SearchModal from "./SearchModal";
 
 function PatientRouteWrapper() {
@@ -25,45 +23,56 @@ function PatientRouteWrapper() {
 
   useEffect(() => {
     postPatientData();
-  }, [patientId]); // The empty array ensures this effect runs once on mount
+  }, []); // The empty array ensures this effect runs once on mount
 
   const postPatientData = async () => {
-    const url = 'https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/basicinfo';
+    const url =
+      "https://us-east-1.aws.data.mongodb-api.com/app/docucare-rubsv/endpoint/basicinfo";
 
     try {
-        const response = await axios.post(url, { patient: patientId });
-        setPatientData(response.data);
-        console.log(response.data);
+      const response = await axios.post(url, { patient: patientId });
+      setPatientData(response.data);
+      console.log(response.data);
     } catch (error) {
-        console.error('Error during POST request with axios:', error);
+      console.error("Error during POST request with axios:", error);
     } finally {
-        setIsLoaded(true);
+      setIsLoaded(true);
     }
   };
 
   if (!isLoaded) {
-      return <div className="box">Loading...</div>;
+    return <div className="box">Loading...</div>;
   }
 
   if (isLoaded && (!patientData || (patientData as any[]).length === 0)) {
-      return <div className="box">Unable to find patient with id: {patientId}</div>;
+    return (
+      <div className="box">Unable to find patient with id: {patientId}</div>
+    );
   }
 
   return (
     <>
       <Grid>
-      <Grid.Col span={6}><PatientInfo patientId={patientId} patientData={patientData} /></Grid.Col>
-      <Grid.Col span={6}><PatientSummary patientId={patientId} patientData={patientData} /></Grid.Col>
-      <Grid.Col span={6}><PatientChart patientId={patientId} patientData={patientData} /></Grid.Col>
-      <Grid.Col span={6}><DoctorNotes patientId={patientId} /></Grid.Col>
-    </Grid> 
+        <Grid.Col span={6}>
+          <PatientInfo patientId={patientId} patientData={patientData} />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <PatientSummary patientId={patientId} patientData={patientData} />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <PatientChart patientId={patientId} patientData={patientData} />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <DoctorNotes patientId={patientId} />
+        </Grid.Col>
+      </Grid>
     </>
   );
 }
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     setIsModalOpen(false); // Automatically open the modal when the app starts
   }, []);
@@ -71,10 +80,10 @@ function App() {
   return (
     <Router>
       <MantineProvider>
-      <SearchModal 
-          modalOpened={isModalOpen} 
-          setModalOpened={setIsModalOpen} 
-          searchQuery={searchQuery} 
+        <SearchModal
+          modalOpened={isModalOpen}
+          setModalOpened={setIsModalOpen}
+          searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
         <div>
