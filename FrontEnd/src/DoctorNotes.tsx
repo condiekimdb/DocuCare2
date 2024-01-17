@@ -152,9 +152,11 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
               <Loader color="green" type="bars" />
             ) : (
               <>
-                <Text fw={500} size="sm">
-                  Other Potential Topics
-                </Text>
+                {keywords.length > 0 && (
+                  <Text fw={500} size="sm">
+                    Other Potential Topics
+                  </Text>
+                )}
                 <Group justify="center">
                   {keywords.map((item, i) => {
                     return (
