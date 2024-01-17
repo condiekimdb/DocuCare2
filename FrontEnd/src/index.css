@@ -112,3 +112,8 @@ button:focus-visible {
   text-align: center;
   min-height:200px;
 }
+
+#chart{
+  height:50px;
+  min-height:350px;
+}

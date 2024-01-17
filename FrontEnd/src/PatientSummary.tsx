@@ -1,5 +1,5 @@
 interface PatientSummaryProps {
-    patientId: string | undefined;
+    patientData: any;
 }
 
 const PatientSummary: React.FC<PatientSummaryProps> = ({ patientId }) => {
