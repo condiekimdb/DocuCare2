@@ -36,8 +36,8 @@ const PatientInfo = () => {
         return <div className="box">Loading...</div>;
     }
 
-    if (isLoaded && !responseData) {
-        return <div className="box">No response for patient ID: {params.patientId}</div>;
+    if (isLoaded && (!responseData || responseData.length === 0)) {
+        return <div className="box">Unable to find patient with id: {params.patientId}</div>;
     }
 
 
