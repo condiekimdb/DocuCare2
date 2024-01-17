@@ -9,6 +9,7 @@ import {
   Button,
   Paper,
   Center,
+  Grid,
 } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
@@ -98,14 +99,12 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
       const response = await axios.post(url, {
         text: input,
       });
-      // setResponseData(response.data);
       console.log("Diagnosis:", response.data);
       setDiagnosis(response.data.message);
     } catch (error) {
       console.error("Error during POST request with axios:", error);
     } finally {
       setIsDiagnosing(false);
-      // setIsLoaded(true);
     }
   };
 
@@ -113,32 +112,13 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
     if (debounced) {
       console.log("Debounced!", patientId);
       setIsLoading(true);
-      // Get updated symptoms here
 
       Promise.all([postSymptoms(), postKeywords()]).then(() =>
         setIsLoading(false)
       );
-      // postSymptoms();
-      // postKeywords();
-
-      // setTimeout(() => {
-      //   setIsLoading(false);
-      // }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced]);
-
-  // useEffect(() => {
-  //   if (isDiagnosing) {
-  //     console.log("isDiagnosing");
-  //     setTimeout(() => {
-  //       setDiagnosis(
-  //         "Patient is likely experiencing seasonal Flu. Recommendation is over the counter flu medicine"
-  //       );
-  //       setIsDiagnosing(false);
-  //     }, 1000);
-  //   }
-  // }, [isDiagnosing]);
 
   const chip_props = {
     color: "green",
@@ -148,79 +128,85 @@ const DoctorNotes = ({ patientId }: DoctorNotesProps) => {
 
   return (
     <Paper withBorder p={20} style={{ border: "1px solid #ccc" }}>
-      <Group w={600}>
+      <Grid>
+        <Grid.Col span={9}>
+          <Flex
+            gap="xxs"
+            justify="flex-start"
+            align="center"
+            direction="column"
+            wrap="wrap"
+            // w={560}
+          >
+            <Text fw={700}>Patient Notes</Text>
+            <Textarea
+              placeholder="Enter notes here..."
+              value={doctorNotes}
+              onChange={(event) => setDoctorNotes(event.currentTarget.value)}
+              autosize
+              minRows={10}
+              mb={10}
+              w="100%"
+            />
+            {isLoading ? (
+              <Loader color="green" type="bars" />
+            ) : (
+              <>
+                {keywords.length > 0 && (
+                  <Text fw={500} size="sm">
+                    Other Potential Topics
+                  </Text>
+                )}
+                <Group justify="center">
+                  {keywords.map((item, i) => {
+                    return (
+                      <Chip key={"keyword_" + i} value="1" {...chip_props}>
+                        {item.keyword}
+                      </Chip>
+                    );
+                  })}
+                </Group>
+              </>
+            )}
+          </Flex>
+        </Grid.Col>
         <Flex
-          gap="xxs"
+          gap="md"
           justify="flex-start"
           align="center"
           direction="column"
           wrap="wrap"
-          w={400}
+          // w={150}
         >
-          <Text fw={700}>Patient Notes</Text>
-          <Textarea
-            placeholder="Enter notes here..."
-            value={doctorNotes}
-            onChange={(event) => setDoctorNotes(event.currentTarget.value)}
-            autosize
-            minRows={10}
-            mb={10}
-            w={400}
-          />
+          {/* <Flex gap="md" justify="flex-start" align="center" direction="column"> */}
           {isLoading ? (
-            <Loader color="green" type="bars" />
+            <Loader color="orange" type="bars" />
           ) : (
-            <Group justify="center">
-              {keywords.map((item, i) => {
-                return (
-                  <Chip key={"keyword_" + i} value="1" {...chip_props}>
-                    {item.keyword}
-                  </Chip>
-                );
-              })}
-            </Group>
+            <>
+              {symptoms.length > 0 && (
+                <>
+                  <Text fw={700}>Symptoms</Text>
+                  {symptoms.map((item, i) => {
+                    return (
+                      <Chip
+                        key={"symptom_" + i}
+                        value="1"
+                        {...chip_props}
+                        color="orange"
+                      >
+                        {item.keyword}
+                      </Chip>
+                    );
+                  })}
+                </>
+              )}
+            </>
           )}
+          {/* </Flex> */}
         </Flex>
-
-        <Flex
-          mih={50}
-          gap="xxs"
-          justify="center"
-          align="flex-start"
-          direction="column"
-          wrap="wrap"
-          w={150}
-        >
-          <Group justify="center">
-            {isLoading ? (
-              <Loader color="orange" type="bars" />
-            ) : (
-              <>
-                {symptoms.length > 0 && (
-                  <>
-                    <Text>Symptoms</Text>
-                    {symptoms.map((item, i) => {
-                      return (
-                        <Chip
-                          key={"symptom_" + i}
-                          value="1"
-                          {...chip_props}
-                          color="orange"
-                        >
-                          {item.keyword}
-                        </Chip>
-                      );
-                    })}
-                    {/* <Button disabled={symptoms.length < 4}>Diagnose</Button> */}
-                  </>
-                )}
-              </>
-            )}
-          </Group>
-        </Flex>
-      </Group>
+      </Grid>
       {symptoms.length > 3 && (
-        <Paper mt="xs" p="sm" withBorder w={600}>
+        <Paper mt="xs" p="sm" withBorder w="100%">
           <Center>
             {isDiagnosing ? (
               <Loader color="green" type="bars" />

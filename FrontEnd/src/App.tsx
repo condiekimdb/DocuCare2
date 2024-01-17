@@ -69,7 +69,7 @@ function PatientRouteWrapper({ setIsModalOpen }: PatientRouteWrapperProps) {
           <PatientSummary patientId={patientId} patientData={patientData} />
         </Grid.Col>
 
-        <Grid.Col span={6}>
+        <Grid.Col span={8}>
           <DoctorNotes patientId={patientId} />
         </Grid.Col>
         <Grid.Col span={12}>

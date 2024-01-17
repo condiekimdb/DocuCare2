@@ -1,0 +1,81 @@
+[
+    {
+        "name": "basic_info",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "sample_function_Aashish",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "createEmbeddingAzure",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "embedSymptomsField",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "embeddingtrigger",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "diagnosis",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "generatesymptoms",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "embedSymptomsField_allDocs",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "callOpenAI",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "clarence_test",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "patient_summary_info",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "searchPatient",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "keyword_fn",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "diagnosis_vector",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "patientsearch",
+        "private": false,
+        "run_as_system": true
+    }
+]
