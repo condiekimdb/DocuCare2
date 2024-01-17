@@ -1,3 +1,4 @@
+![LogoTitle](Screenshots/Docucare_LogoTitle.png)
 
 # Details
 
