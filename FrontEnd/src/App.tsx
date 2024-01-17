@@ -1,6 +1,5 @@
 import "./App.css";
 import { MantineProvider, Grid, Button } from "@mantine/core";
-// import { IconSearch } from "@tabler/icons";
 import DocucareLogo from "./assets/docucare.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -63,7 +62,6 @@ function PatientRouteWrapper({ setIsModalOpen }: PatientRouteWrapperProps) {
         </Grid.Col>
         <Grid.Col span={4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Button variant="filled" onClick={() => setIsModalOpen(true)}>
-            {/* <IconSearch></IconSearch> */}
             Patient Search
           </Button>
         </Grid.Col>
